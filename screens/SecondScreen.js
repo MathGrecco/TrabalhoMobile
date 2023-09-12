@@ -1,8 +1,8 @@
 import React from 'react'
 import { StatusBar } from 'expo-status-bar'
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
-export default function HomeScreen() {
+const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>você chegou cara o/</Text>
@@ -33,6 +33,14 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
   button: {
-    backgroundColor: '#f1a35a'
+    backgroundColor: '#f1a35a',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10
+  },
+  buttonText: {
+    fontSize: 15
   }
 })
+
+export default HomeScreen

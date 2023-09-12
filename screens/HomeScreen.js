@@ -1,14 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View
-} from 'react-native'
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import axios from 'axios'
 
-export default function HomeScreen({ navigation }) {
+const HomeScreen = ({ navigation }) => {
+  const [jokes, setJokes] = useState([])
+  useEffect(() => {
+    async function fetchJokes() {
+      try {
+        const response1 = await axios.get(
+          'https://api.chucknorris.io/jokes/random'
+        )
+        const response2 = await axios.get(
+          'https://api.chucknorris.io/jokes/random'
+        )
+
+        const joke1 = response1.data.value
+        const joke2 = response2.data.value
+
+        setJokes([joke1, joke2])
+      } catch (error) {
+        console.error('Erro ao buscar piadas:', error)
+      }
+    }
+
+    fetchJokes()
+  }, [])
+
   const handleLogin = () => {
     if (handleLogin) {
       navigation.navigate('Second Page')
@@ -17,11 +35,18 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Agora é algo mais sério</Text>
-      <StatusBar style="light" />
+      <Text style={styles.title}>Piadas do Chuck Norris</Text>
+      <View style={styles.input}>
+        {jokes.map((joke, index) => (
+          <Text key={index} style={styles.jokeText}>
+            {joke}
+          </Text>
+        ))}
+      </View>
+      <Button title="Recarregar Piadas" onPress={() => fetchJokes()} />
 
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}> Entrar </Text>
+        <Text style={styles.buttonText}> Ir para a segunda tela </Text>
       </TouchableOpacity>
     </View>
   )
@@ -49,6 +74,14 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
   button: {
-    backgroundColor: '#f1a35a'
+    backgroundColor: '#f1a35a',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10
+  },
+  buttonText: {
+    fontSize: 15
   }
 })
+
+export default HomeScreen

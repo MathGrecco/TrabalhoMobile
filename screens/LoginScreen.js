@@ -23,7 +23,7 @@ const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Seja Bem Vindo(a)</Text>
-      <StatusBar style="light" />
+      <StatusBar style="dark" />
 
       <Text>Login</Text>
       <TextInput
