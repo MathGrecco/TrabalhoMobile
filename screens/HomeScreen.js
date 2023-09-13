@@ -17,7 +17,6 @@ const HomeScreen = ({ navigation }) => {
       const joke1 = response1.data.value
       const joke2 = response2.data.value
 
-      // Atualize o estado para incluir o texto de cada piada
       setJokes([joke1, joke2])
     } catch (error) {
       console.error('Erro ao buscar as piadas:', error)
@@ -38,7 +37,6 @@ const HomeScreen = ({ navigation }) => {
         <Text style={styles.title}>Piadocas do Chuck Norris</Text>
       </View>
 
-      {/* Mapeie as piadas e renderize o texto de cada piada */}
       {jokes.map((joke, index) => (
         <View key={index} style={styles.jokeContainer}>
           <Text style={styles.jokeText}>{joke}</Text>
@@ -92,13 +90,13 @@ const styles = StyleSheet.create({
   jokeContainer: {
     width: '80%',
     marginBottom: 20,
-    backgroundColor: '#e0e0e0', // Cor de fundo para as piadas
+    backgroundColor: '#e0e0e0',
     borderRadius: 10,
     padding: 10
   },
   jokeText: {
     fontSize: 16,
-    color: '#333' // Cor do texto das piadas
+    color: '#333'
   }
 })
 
